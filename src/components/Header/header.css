@@ -4,7 +4,7 @@
   font: 60px "Caramel", cursive;
   color: #fcd00b;
   width: 100%;
-  background-color: #442611;
+  background-color: #291c13;
   border-bottom: 3px solid #40472d;
 }
 .header img {
@@ -20,7 +20,7 @@
 }
 
 .header_main_button {
-  width: 200px;
+  width: 150px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;

@@ -1,0 +1,29 @@
+.prato{
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    padding: 5px;
+    width: 400px;
+    height: 200px;
+    border-radius: 10px 10px 10px 10px;
+}
+.prato img{
+    width: 200px;
+    background-color: black;
+    border: 1px solid #fff;
+    padding: 3px;
+}
+.prato div{
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    line-height: 1.3;
+    text-align: justify;
+    padding: 5px;
+}
+.prato div :nth-child(2){
+    margin-top: 5px;
+    text-align: center;
+    font-size: 40px;
+}

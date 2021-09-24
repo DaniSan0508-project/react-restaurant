@@ -1,10 +1,13 @@
 import { Switch, Route } from "react-router";
-import { Home } from "../pages/Home";
+import Provider from "../contexts/pratos";
+import { Menu } from "../pages/Menu";
 
 export function Routes(){
     return(
-        <Switch>
-            <Route component={Home} path="/" exact/>
-        </Switch>
+        <Provider>
+            <Switch>
+                <Route component={Menu} path="/" exact/>
+            </Switch>
+        </Provider>
     )
 } 

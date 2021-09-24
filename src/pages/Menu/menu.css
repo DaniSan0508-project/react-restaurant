@@ -1,0 +1,17 @@
+.menu {
+    background-color: blueviolet;
+}
+.menu article{
+    max-width: 95%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 5px auto;
+    padding: 15px;
+    background-color: chartreuse;
+    border-radius: 5px;
+}
+.menu h1{
+    text-align: center;
+    font-size: 5em;
+}

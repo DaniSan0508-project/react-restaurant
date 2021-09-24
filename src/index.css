@@ -6,13 +6,13 @@
 }
 body {
   font: 14px "Roboto", sans-serif;
+  background-color: #fffed4;
 }
 a {
   cursor: pointer;
 }
 .container {
-  max-width: 900px;
-  margin: 5px 0 0 230px;
-  background-color: aqua;
-  height: 100%;
+ margin: 0 auto;
+ max-width: 1200px;
+ background-color: chocolate;
 }
