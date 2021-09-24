@@ -1,5 +1,5 @@
 import './menu.css';
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { PratosContext } from '../../contexts/pratos';
 import { Prato } from '../../components/Prato';
 
@@ -14,10 +14,10 @@ export function Menu(){
                     {
                      pratos.map((prato)=>{
                          return(
-                            <Prato id={prato.id} 
-                            imagem={prato.imagem} 
-                            descricao={prato.descricao} 
-                            valor={prato.valor}/> 
+                                <Prato id={prato.id} 
+                                imagem={prato.imagem} 
+                                descricao={prato.descricao} 
+                                valor={prato.valor}/>
                         )
                      })
                     }

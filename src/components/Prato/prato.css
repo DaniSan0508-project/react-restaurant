@@ -10,6 +10,7 @@
 }
 .prato img{
     width: 200px;
+    border-radius: 10px;
     background-color: black;
     border: 1px solid #fff;
     padding: 3px;
