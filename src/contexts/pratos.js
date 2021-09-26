@@ -5,6 +5,7 @@ export const PratosContext = createContext({});
 
 export default function PratosProvider({children}){
     const [pratos, setPratos] = useState([]);
+    const [selecaoPratos, setSelecaoPratos] = useState([]);
 
     useEffect(()=>{
         async function getPratos(){
@@ -25,8 +26,25 @@ export default function PratosProvider({children}){
         getPratos();
     },[]);
 
+
+    async function getOne(id){
+        await firebase.firestore().collection('pratos')
+        .doc(id)
+        .get()
+        .then((item)=>{
+            const data = {
+                id:item.id,
+                descricao:item.data().description,
+                imagem:item.data().imageUrl,
+                valor:item.data().valor,
+            }
+            setSelecaoPratos([...selecaoPratos, data])
+            localStorage.setItem('pratos',JSON.stringify(selecaoPratos))
+        })
+    }
+
     return(
-        <PratosContext.Provider value={{pratos}}>
+        <PratosContext.Provider value={{pratos, getOne, selecaoPratos}}>
             {children}
         </PratosContext.Provider>
 

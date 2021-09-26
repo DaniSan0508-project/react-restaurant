@@ -10,7 +10,7 @@ export function Header(){
                 <img src={ logo } alt="logo-restaurante" />
                     <h1>React Restaurant</h1>
                     <div className="header_main_button">
-                        <Link to="/">
+                        <Link to="/carrinho">
                             <MdShoppingBasket size={40} color="#fff"/>
                         </Link>
                         <Link to="/">
