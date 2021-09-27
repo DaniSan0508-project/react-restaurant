@@ -1,0 +1,16 @@
+.box-total{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.total{
+    width: 200px;
+    height: 130px;
+    border: 1px solid #000;
+    background-color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 50px;
+    color: red;
+    
+}

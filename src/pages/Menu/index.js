@@ -9,19 +9,21 @@ export function Menu(){
     const { pratos } = useContext(PratosContext)
 
     return(
-        <div className="menu container">
-           <article>
-                    {
-                     pratos.map((prato)=>{
-                         return(
-                                <Prato id={prato.id} 
-                                imagem={prato.imagem} 
-                                descricao={prato.descricao} 
-                                valor={prato.valor}/>
-                        )
-                     })
-                    }
-           </article>
+        <div className="container">
+            <div className="menu">
+            <article>
+                        {
+                        pratos.map((prato)=>{
+                            return(
+                                    <Prato id={prato.id} 
+                                    imagem={prato.imagem} 
+                                    descricao={prato.descricao} 
+                                    valor={prato.valor}/>
+                            )
+                        })
+                        }
+            </article>
+            </div>
         </div>
     )
 }
