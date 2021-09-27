@@ -1,15 +1,21 @@
 import './carrinho.css';
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Prato } from "../../components/Prato";
+import { PratosContext } from '../../contexts/pratos';
 export function Carrinho(){ 
-  const [pratoSelecionado, setPratoSelecionado] = useState([{id:1}]);
-  
-  
+  const [pratoSelecionado, setPratoSelecionado] = useState([]);
+
+  const { valorTotal } = useContext(PratosContext)
+
   useEffect(()=>{
     const pratoSelecionado = localStorage.getItem('pratos')
+
     setPratoSelecionado(JSON.parse(pratoSelecionado) || [])
   },[])
+
+
+  
   return(
 
     <div className="menu container">
@@ -21,17 +27,24 @@ export function Carrinho(){
         {
           pratoSelecionado.map((prato)=>{
             return(
-              <Prato
-                id={prato.id}
-                descricao={prato.descricao}
-                imagem={prato.imagem}
-                valor={prato.valor}
-              />
+              <>
+                <Prato
+                  id={prato.id}
+                  descricao={prato.descricao}
+                  imagem={prato.imagem}
+                  valor={prato.valor}
+                />
+              </>
             )
           })
         }
+          <div>
+            {
+              valorTotal.reduce((total,valor)=>{return total + valor})
+            }
+          </div>
+        
         </article>
     </div>
   )
-
-}
+  }

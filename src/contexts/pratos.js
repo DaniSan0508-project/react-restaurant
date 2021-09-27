@@ -6,6 +6,7 @@ export const PratosContext = createContext({});
 export default function PratosProvider({children}){
     const [pratos, setPratos] = useState([]);
     const [selecaoPratos, setSelecaoPratos] = useState([]);
+    const [valorTotal, setValorTotal] = useState([]);
 
     useEffect(()=>{
         async function getPratos(){
@@ -32,6 +33,9 @@ export default function PratosProvider({children}){
         .doc(id)
         .get()
         .then((item)=>{
+            const valorPrato  = {
+                valor:item.data().valor
+            };
             const data = {
                 id:item.id,
                 descricao:item.data().description,
@@ -39,12 +43,13 @@ export default function PratosProvider({children}){
                 valor:item.data().valor,
             }
             setSelecaoPratos([...selecaoPratos, data])
+            setValorTotal([...valorTotal, Number(valorPrato.valor) || 0])
             localStorage.setItem('pratos',JSON.stringify(selecaoPratos))
         })
     }
 
     return(
-        <PratosContext.Provider value={{pratos, getOne, selecaoPratos}}>
+        <PratosContext.Provider value={{pratos, getOne, selecaoPratos, valorTotal}}>
             {children}
         </PratosContext.Provider>
 
