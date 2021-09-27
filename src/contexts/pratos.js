@@ -34,6 +34,7 @@ export default function PratosProvider({children}){
         .get()
         .then((item)=>{
             const valorPrato  = {
+                id:item.data().id,
                 valor:item.data().valor
             };
             const data = {
@@ -44,8 +45,8 @@ export default function PratosProvider({children}){
             }
             setSelecaoPratos([...selecaoPratos, data])
             setValorTotal([...valorTotal, Number(valorPrato.valor)])
-            localStorage.setItem('pratos',JSON.stringify(selecaoPratos))
-            localStorage.setItem('valor',JSON.stringify(valorTotal))
+            localStorage.setItem('pratos',selecaoPratos)
+            localStorage.setItem('valor',valorPrato)
         })
     }
 
