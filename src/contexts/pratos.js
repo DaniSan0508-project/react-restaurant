@@ -33,10 +33,6 @@ export default function PratosProvider({children}){
         .doc(id)
         .get()
         .then((item)=>{
-            const valorPrato  = {
-                id:item.data().id,
-                valor:item.data().valor
-            };
             const data = {
                 id:item.id,
                 descricao:item.data().description,
@@ -44,14 +40,12 @@ export default function PratosProvider({children}){
                 valor:item.data().valor,
             }
             setSelecaoPratos([...selecaoPratos, data])
-            setValorTotal([...valorTotal, Number(valorPrato.valor)])
-            localStorage.setItem('pratos',selecaoPratos)
-            localStorage.setItem('valor',valorPrato)
+            localStorage.setItem('pratos',JSON.stringify(selecaoPratos))
         })
     }
 
     return(
-        <PratosContext.Provider value={{pratos, getOne, selecaoPratos, valorTotal}}>
+        <PratosContext.Provider value={{pratos, getOne, selecaoPratos}}>
             {children}
         </PratosContext.Provider>
 
