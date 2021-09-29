@@ -27,6 +27,14 @@ export default function PratosProvider({children}){
         getPratos();
     },[]);
 
+    function deletePrato(id){
+        let filtroPratos = pratoSelecionado.filter((prato)=>{
+          return (prato.id !== id)
+        })
+        setPratoSelecionado(filtroPratos);
+      }
+    
+
 
     async function getOne(id){
         await firebase.firestore().collection('pratos')
@@ -34,23 +42,18 @@ export default function PratosProvider({children}){
         .get()
         .then((item)=>{
             const data = {
-                id:item.id,
+                id:item.id+Math.round(Math.random()*1000),
                 descricao:item.data().description,
                 imagem:item.data().imageUrl,
                 valor:item.data().valor,
             }
-            setPratoSelecionado(data)
-            const minhaLista = localStorage.getItem('pratos');
-            let pratosSalvos = JSON.parse(minhaLista) || [];
-
-            pratosSalvos.push(pratoSelecionado)
-            localStorage.setItem('pratos',JSON.stringify(pratosSalvos))
-            alert('prato salvo')
+            setPratoSelecionado([...pratoSelecionado, data])
+            alert('prato selecionado')
         })
     }
 
     return(
-        <PratosContext.Provider value={{pratos, getOne}}>
+        <PratosContext.Provider value={{pratos, getOne, pratoSelecionado, deletePrato}}>
             {children}
         </PratosContext.Provider>
 

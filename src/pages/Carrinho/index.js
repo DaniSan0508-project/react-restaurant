@@ -1,28 +1,17 @@
 import './carrinho.css';
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Prato } from "../../components/Prato";
+import { PratosContext } from '../../contexts/pratos';
 
 
 export function Carrinho(){ 
+  const { pratoSelecionado, deletePrato } = useContext(PratosContext)
   const [pratos, setPratos] = useState([]);
 
   useEffect(()=>{
-    const minhaLista = localStorage.getItem('pratos');
-    setPratos(JSON.parse(minhaLista) || [])
-
-  },[])
-
-
-
-
-  function deletePrato(id){
-    let filtroPratos = pratos.filter((prato)=>{
-      return (prato.id !== id)
-    })
-    setPratos(filtroPratos);
-    localStorage.setItem('pratos',JSON.stringify(filtroPratos))
-  }
+    setPratos(pratoSelecionado)
+  },[pratoSelecionado])
 
 
   function somaTotal(){
@@ -38,6 +27,10 @@ export function Carrinho(){
 
     <div className="menu container">
       <article>
+        {
+          pratoSelecionado.length === 0 && <h1>Nenhum prato Selecionado</h1>
+        }
+
         {
           pratos.map((prato)=>{
       

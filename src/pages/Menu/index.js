@@ -1,5 +1,5 @@
 import './menu.css';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { PratosContext } from '../../contexts/pratos';
 import { Prato } from '../../components/Prato';
 
@@ -24,6 +24,7 @@ export function Menu(){
                             )
                         })
                         }
+
             </article>
             </div>
         </div>
