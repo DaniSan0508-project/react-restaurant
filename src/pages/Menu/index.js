@@ -15,7 +15,9 @@ export function Menu(){
                         {
                         pratos.map((prato)=>{
                             return(
-                                    <Prato id={prato.id} 
+                                    <Prato 
+                                    key={prato.id}
+                                    id={prato.id} 
                                     imagem={prato.imagem} 
                                     descricao={prato.descricao} 
                                     valor={prato.valor}/>

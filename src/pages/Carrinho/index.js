@@ -5,33 +5,29 @@ import { Prato } from "../../components/Prato";
 
 
 export function Carrinho(){ 
-  const [pratoSelecionado, setPratoSelecionado] = useState([]);
-  const [valorTotal, setValorTotal] = useState([]);
-
+  const [pratos, setPratos] = useState([]);
 
   useEffect(()=>{
-    
-    const prato = JSON.parse(localStorage.getItem('pratos'))
-    setPratoSelecionado(prato || [])
-  },[pratoSelecionado])
+    const minhaLista = localStorage.getItem('pratos');
+    setPratos(JSON.parse(minhaLista) || [])
+
+  },[])
 
 
 
 
-  function removePrato(id){
-
-    let filtraPratos = pratoSelecionado.filter((item)=>{
-      return (item.id !== id)
+  function deletePrato(id){
+    let filtroPratos = pratos.filter((prato)=>{
+      return (prato.id !== id)
     })
-    
-
-    setPratoSelecionado(filtraPratos);
-    localStorage.setItem('pratos',JSON.stringify(filtraPratos))
+    setPratos(filtroPratos);
+    localStorage.setItem('pratos',JSON.stringify(filtroPratos))
   }
+
 
   function somaTotal(){
     const total = [0]
-    pratoSelecionado.forEach((prato)=>{
+    pratos.forEach((prato)=>{
       total.push(parseFloat(prato.valor))
     })
     return total.reduce((total,valor)=>{return total + valor})
@@ -43,27 +39,19 @@ export function Carrinho(){
     <div className="menu container">
       <article>
         {
-          pratoSelecionado.length === 0 && (
-          
-          <div>
-            <h1>Nenhum prato Selecionado</h1>
-          </div>
-          )
-        }
-
-        {
-          pratoSelecionado.map((prato)=>{
-            somaTotal()
+          pratos.map((prato)=>{
+      
+            somaTotal(prato)
             return(
               <>
-              <div>
-                <Prato
+              <div key={prato.id}>
+                <Prato  
                   id={prato.id}
                   descricao={prato.descricao}
                   imagem={prato.imagem}
                   valor={prato.valor}
                 />  
-                <button onClick={()=>{removePrato(prato.id)}}>Remover</button>
+                <button onClick={()=>{deletePrato(prato.id)}}>Remover</button>
               </div>
               </>
             )
@@ -72,7 +60,7 @@ export function Carrinho(){
           <div className="box-total">
                   <div className="total">
                     <h3>Total</h3>
-                    {somaTotal().toFixed(2)}
+                  {somaTotal().toFixed(2)}
                   </div>
           </div>
         </article>

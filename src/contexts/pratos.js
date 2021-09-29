@@ -5,8 +5,7 @@ export const PratosContext = createContext({});
 
 export default function PratosProvider({children}){
     const [pratos, setPratos] = useState([]);
-    const [selecaoPratos, setSelecaoPratos] = useState([]);
-    const [valorTotal, setValorTotal] = useState([0]);
+    const [pratoSelecionado, setPratoSelecionado] = useState([]);
 
     useEffect(()=>{
         async function getPratos(){
@@ -19,8 +18,9 @@ export default function PratosProvider({children}){
                        descricao:prato.data().description,
                        imagem:prato.data().imageUrl,
                        valor:prato.data().valor,
-                   })
-               })
+                    })
+                    console.log(prato.id)
+                })
                setPratos(list)
             })
         }
@@ -39,13 +39,18 @@ export default function PratosProvider({children}){
                 imagem:item.data().imageUrl,
                 valor:item.data().valor,
             }
-            setSelecaoPratos([...selecaoPratos, data])
-            localStorage.setItem('pratos',JSON.stringify(selecaoPratos))
+            setPratoSelecionado(data)
+            const minhaLista = localStorage.getItem('pratos');
+            let pratosSalvos = JSON.parse(minhaLista) || [];
+
+            pratosSalvos.push(pratoSelecionado)
+            localStorage.setItem('pratos',JSON.stringify(pratosSalvos))
+            alert('prato salvo')
         })
     }
 
     return(
-        <PratosContext.Provider value={{pratos, getOne, selecaoPratos}}>
+        <PratosContext.Provider value={{pratos, getOne}}>
             {children}
         </PratosContext.Provider>
 
